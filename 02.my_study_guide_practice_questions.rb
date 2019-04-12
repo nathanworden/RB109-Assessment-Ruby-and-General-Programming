@@ -152,6 +152,33 @@ p str.+(" School")
 
 
 
+#14) What will this code return?
+def amethod(param)
+  param << " School"
+  param += " is a"
+  param << " online school"
+  param += " for developers."
+end
+
+str = "Launch"
+amethod(str)
+p str
+# Answer:
+#=> "Launch School"
+
+
+
+
+#15) What will this code return?
+str = "Chris"
+3.times do |n|
+  str = "Lee"
+end
+
+p str
+
+
+
 
 
 
