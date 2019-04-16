@@ -301,3 +301,512 @@ end
 #Answer:
 # "written assessment"
 # "interview"
+
+
+# 24) What is returned by this code?
+# Concept: Outer scope variables can be accessed by inner scope
+a = 1
+
+loop do 
+  puts a
+  a = a + 1
+  break
+end
+
+p a
+# Answer:
+# => 2
+#Notes "a" was re-assigned in the inner scope
+
+
+#25) What is returned by this code?
+# Concept: inner scope variables cannot be acced in outer scope
+loop do
+  b = 1
+  break
+end
+
+p b
+#Answer: 
+# NameError: undefined local variable or method `b` for main:Object
+
+
+# 26) What does the following code output?
+# Concept: Peer scopes do not conflict
+2.times do
+  a = 'hi'
+  puts a
+end
+
+loop do
+  puts a
+  break
+end
+
+puts a
+
+# Answer:
+# 'hi'
+# 'hi'
+# NameError: undefined local variable or method `a` for main:Object
+# NameError: undefined local variable or method `a` for main:Object
+# Notes: Peer blocks cannot reference variables initialized in other blocks.
+
+
+# 27) What will be output by the following code?
+a = 1
+
+loop do
+  b = 2
+
+  loop do
+    c = 3
+    puts a
+    puts b
+    puts c
+    break
+  end
+
+  puts a
+  puts b
+  puts c
+  break
+end
+
+puts a
+puts b
+puts c
+
+# Answer
+# 1
+# 2
+# 3
+# 1
+# 2
+# NameError
+# 1
+# NameError
+# NameError
+
+
+
+# 28) What will the following code output?
+# Concept: Variable shadowing 
+n = 10
+
+[1, 2, 3].each do |n|
+  puts n
+end
+
+# Answer:
+# 1
+# 2
+# 3
+# Notes: variable shadowing is when an inner scoped variable is
+# given the same name as an outer scoped variable. When this happens
+# it prevents access to the outer scope local variable.
+
+
+# 29) What is output by the following code?
+# Concept: Variable Shadowing
+n = 10
+
+1.times do |n|
+  n = 11
+end
+
+puts n
+
+# Answer:
+# 10
+# Notes: Variable shadowing prevents us from making chages to the
+# outer scoped variable.
+
+
+
+# 30) What is returned by the following code?
+# Concept: A method definition can't access local variables in
+# another scope.
+a = 'Chris'
+
+def some_method
+  puts a
+end
+
+some_method
+
+# Answer:
+# NameError (undefined local variable or method `a' for main:Object)
+
+
+
+# 31) What is returned by the following code?
+# Concept: A method definition can access objects passed in
+def some_method(a)
+  p a
+end
+
+some_method(5)
+
+#Answer:
+# => 5
+# Notes: The integer 5 is passed into some_method as an argument,
+# assigned to the method parameter, a, and thus made available
+# to the method body as a local variable. That's why we can call
+# p a from within the method definition.
+
+
+
+# 32) What is output and what is returned by the following code?
+# Concept: The rules of scope for a method invocation with a 
+# block remain in full effect even if we're working inside a 
+# method definition.
+def some_method
+  a = 1
+  5.times do
+    puts a
+    b = 2
+  end
+
+  puts a
+  puts b
+end
+
+some_method
+
+#Answer:
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# NameError (undefined local variable or method `b' for main:Object)
+
+
+# 33) What is printed out by this code?
+# Concept: Constants
+USERNAME = 'Batman'
+def authenticate
+  puts "Logging in #{USERNAME}"
+end
+
+authenticate
+#Answer:
+# Logging in Batman
+
+
+# 34) What is printed out by this code?
+# Concept: Constants
+loop do 
+  MY_TEAM = "Phoenix Suns"
+  break
+end
+
+puts MY_TEAM
+
+# Answer
+# "Phoenix Suns"
+
+
+
+# 34) What will this code output? And what will it return?
+# Concept: Method parameter not used
+def greetings(str)
+  puts "Goodbye"
+end
+word = "Hello"
+greetings(word)
+
+#Answer
+# Outputs 'Goodbye'
+# Returns: nil
+
+
+
+# 35) What will this code output? And what will it return?
+# Concept: Method parameter used
+def greetings(str)
+  puts str
+  puts "Goodbye"
+end
+
+word = "Hello"
+
+greetings(word)
+
+#Answer: 
+# Outputs 'Hello'
+# Outputs 'Goodbye'
+# Returns: nil
+
+
+# 36) What will the following code return?
+# Concept: Block not executed
+def greetings
+  p "Goodbye"
+end
+
+word = "Hello"
+
+greetings do
+  p word
+end
+
+# Answer:
+# => "Goodbye"
+
+
+
+#37) What will the following code output?
+# Concept: block executed
+
+def greetings
+  yield
+  p "Goodbye"
+end
+
+word = "Hello"
+
+greetings do
+  p word
+end
+
+# Answer:
+# "Hello"
+# "Goodbye"
+# Notes: The yield keyword is what controls the interaction with the 
+# block, in this case it executes the block once. Since the block
+# has access to the local variable word, Hello is output when the
+# block is executed. Don't focus here on what yield is or how it works;
+# writing methods that take blocks is explored at depth in a later course.
+# The important take-away for now is that blocks and methods can
+# interact with each other; the level of that interaction is set
+# by the method definition and then used at method invocation.
+
+
+
+# 38) What will the following code output?
+# Concept: Methods can access local variables through interaction with blocks
+a = "Chris"
+[1, 2, 3].map { |num| a}
+
+#Answer:
+# => ["Chris", "Chris", "Chris"]
+# Notes: The Array#map method is defined in such a way that it 
+# uses the return value of the block to perform transformation
+# on each element in an array. In the above example, #map doesn;t
+# have direct access to 'a' but it can use the value of 'a' to perform
+# transfermation on the array since the block can access 'a' and
+# reutnrs it to #map.
+
+
+# Review
+
+# Method definitions cannot directly access local variables 
+# initialized outside of the method definition, nor can local variables
+# initialized outside of the method definition be reassigned from
+# within it. A block can access local variables initialized outside
+# and can reassign those variables. We already know that methods can
+# access local variables passed in as arguments, and now we have
+# seen that methods can access local variables through ineraction 
+# with blocks.
+
+# Given this additional context, we can think of method definition
+# as setting a certain scope for any local vaiables in terms of the
+# parameters that the method definition has, what it does with
+# those parameters, and also how it interacts (if at all) with a block
+# We can think of method invocation as using the scope set by
+# the method definition. If the method is defined to use a block,
+# then the scope of the block can provide additional flexibility 
+# in terms of how the method invocation interacts with its 
+# surroundings
+
+# Key points:
+#  - The def..end construciton in Ruby is method definition
+#  - Referencing a method name, either of an exisiting method or 
+# subsequent to definition, is method invocation
+# - Method invocation followed by {..} or do..end defines a block;
+# the block is part of the method invocation
+# - Method definition sets a scope for local variables in terms of
+# parameters and interaction with blocks
+# - Method invocation uses the scope set by the method definition.
+
+
+
+# 39) What does this code print out?
+# Concept: Pass by reference / value
+def change_name(name)
+  name = 'bob'
+end
+
+name = 'jim'
+p change_name(name)
+# Answer:
+# 'bob'
+
+
+
+
+# 40) What does this code print out?
+# Concept: Pass by reference / value
+def change_name(name)
+  name = 'bob'
+end
+
+name = 'jim'
+change_name(name)
+puts name
+
+# Answer:
+# 'jim'
+# Notes: The code example above has two different local variables
+# named name. There is one scoped within the method, and there 
+# is one in the main scope. This is not variable shadowning,
+# because the main scope variable is not accessible to the method
+# Within the method, we could have named the variable something other 
+# than name.
+
+
+
+# 41) What does this code print out?
+# Concept: Mutation, pass by reference / value. When an operation
+# within the method mutates the caller, it will affect the
+# original object.
+def cap(str)
+  str.capitalize!
+end
+
+name = 'jim'
+cap(name)
+puts name
+
+# Answer:
+# "Jim"
+
+
+
+# 42) What does this code print out?
+# Concept: Mutation, pass by reference / value.
+def cap(str)
+  str.capitalize
+end
+
+name = 'jim'
+cap(name)
+puts name
+
+# Answer:
+# "jim"
+
+
+
+# 43)  What does this code print out?
+# Concept: Mutation, pass by reference / value
+def add_name(arr, name)
+  arr << name
+end
+
+names = ['bob', 'kim']
+add_name(names, 'jim')
+puts names.inspect
+
+# Answer: 
+# => ["bob", "kim", "jim"]
+
+
+
+# 44)  What does this code print out?
+# Concept: pass by reference / value
+def add_name(arr, name)
+  arr = arr + [name]
+end
+
+names = ['bob', 'kim']
+add_names(names, 'jim')
+puts names.inspect
+
+# Answer: 
+# > ["bob", "kim"]
+# Notes: This code doesn't change the names array. When we use
+# + to concatenate two arrays together, it is returnning a new
+# array and not mutating the original. 
+
+
+
+
+# 45)  What does this code print out?
+# Concept: pass by reference / value
+def add_name(arr, name)
+  arr = arr << [name]
+end
+
+names = ['bob', 'kim']
+add_names(names, 'jim')
+puts names.inspect
+
+# Answer: 
+# > ["bob", "kim", "jim"]
+# Notes: This code DOES change the names array. When we use << to
+# append a new value into an array, it is mutating the original
+# array and not returning a new array.
+
+
+# 46) What does the following code return?
+# Concept: Variables as pointers
+a = "hi there"
+b = a
+a = "not here"
+p b
+
+# Answer:
+# => "hi there"
+
+
+# 47) What does the following code return?
+# Concept: Variables as pointers
+a = "hi there"
+b = a
+a << ", Bob"
+p b
+
+# Answer:
+# "hi there, Bob"
+# Notes: Variables are pointers to physical space in memory
+
+
+# 48) What does the following code print out?
+# Concept: Variables as pointers
+a = [1, 2, 3, 3]
+b = a
+c = a.uniq
+
+p a
+p b
+p c
+
+# Answer:
+# [1, 2, 3, 3]
+# [1, 2, 3, 3]
+# [1, 2, 3]
+
+
+# 48) What does the following code print out?
+# Concept: Variables as pointers
+a = [1, 2, 3, 3]
+b = a
+c = a.uniq!
+
+p a
+p b
+p c
+
+# Answer:
+# [1, 2, 3]
+# [1, 2, 3]
+# [1, 2, 3]
+
+
+
+
+
