@@ -808,5 +808,177 @@ p c
 
 
 
+# 49) What does p a return in the follwing code?
+def test(b)
+  b.map {|letter| "I like the letter: #{letter}"}
+end
+
+a = ['a', 'b', 'c']
+test(a)
+p a
+
+#Answer:
+# => ['a', 'b', 'c']
+
+
+
+
+# 50) What does p a return in the follwing code?
+def test(b)
+  b.map! {|letter| "I like the letter: #{letter}"}
+end
+
+a = ['a', 'b', 'c']
+test(a)
+p a
+
+#Answer:
+# => ['"I like the letter: a', '"I like the letter: b', '"I like the letter: c']
+
+
+
+# 51) What is reuturned by this code?
+# Concept: each method
+def a_method
+  [1, 2, 3].each do |num|
+    puts num * 2
+  end
+end
+
+a_method
+
+#Answer:
+# => [1, 2, 3]
+
+
+
+# 52) What is returned by this code?
+# Concept: each method. Implicit return
+
+def a_method
+  [1, 2, 3].each do |num|
+    puts num * 2
+  end
+
+  puts 'hi'
+end
+
+a_method
+
+# Answer:
+# => nil
+
+
+# 53) What is returned by this code?
+# Concept: select method.
+
+[1, 2, 3].select do |num|
+  num + 1
+end
+
+# Answer:
+# => [1, 2, 3]
+
+
+
+# 54) What is returned by this code?
+# Concept: select method.
+
+[1, 2, 3].select do |num|
+  num + 1
+  puts num
+end
+
+# Answer:
+# => []
+
+
+# 55) What is returned by this code?
+# Concept: map method
+
+[1, 2, 3].map do |num|
+  num * 2
+end
+
+# Answer:
+# => [2, 4, 6]
+
+
+# 56) What is returned by this code?
+# Concept: map method
+
+[1, 2, 3].map do |num|
+  num.odd?
+end
+
+# Answer:
+# => [true, false, true]
+
+
+# 57) What is returned by this code?
+# Concept: map method
+
+[1, 2, 3].map do |num|
+  'hi'
+end
+
+# Answer:
+# ['hi', 'hi', 'hi']
+
+
+
+# 58) What is returned by this code?
+a = 'Chris'
+b = a
+a += b
+
+p a
+
+# Answer:
+# "ChrisChris"
+
+
+
+
+# Examine the code example below. The last line outputs the 
+# String 'Hi' rather than the String 'Hello'. Explain what is 
+# happening here and identify the underlying principle that this 
+# demonstrates.
+
+greeting = 'Hello'
+
+loop do
+  greeting = 'Hi'
+  break
+end
+
+puts greeting
+
+# My Answer:
+# On line 1 the local variable `greeting` is initialized to reference
+# a string object with the value 'Hello'. On line 3 the loop method
+# is called and a block is passed to it as an argument. In the 
+# block on line 4 the variable `greeting` is reassigned to 
+# reference a new object with the value 'Hi'. On line 5 the keyword
+# break ends the loop. On line 8 the puts method is invoked and 
+# the variable greeting is passed in as an argument. puts greeting
+# outputs 'Hi' and returns nil. This is an example of how variables
+# initialized in an outer scope are available inside an inner scope.
+
+
+# Book Answer:
+# The local variable greeting is assigned to the String 'Hello'
+ # on line 1. The do..end alongside the loop method invocation 
+ #  on lines 3 to 6 defines a block, within which greeting is 
+ #  reassigned to the String Hi on line 4. The puts method is 
+ #  called on line 8 with the variable greeting passed to it as 
+ #  an argument; since greeting is now assigned to 'Hi', this is
+ #   what is output. This example demonstrates local variable 
+ #   scoping rules in Ruby; specifically the fact that a local 
+ #   variable initialized outside of a block is accessible inside 
+ #   he block.
+
+
+
 
 

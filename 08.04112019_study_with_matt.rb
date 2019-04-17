@@ -32,7 +32,3 @@ def pyramid(w, l, h)
 end
 
 p pyramid(2, 4, 1000000000)
-
-
-
-k
