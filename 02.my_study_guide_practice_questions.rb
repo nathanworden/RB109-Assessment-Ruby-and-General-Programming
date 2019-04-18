@@ -940,7 +940,7 @@ p a
 
 
 
-# Examine the code example below. The last line outputs the 
+# 59) Examine the code example below. The last line outputs the 
 # String 'Hi' rather than the String 'Hello'. Explain what is 
 # happening here and identify the underlying principle that this 
 # demonstrates.
@@ -977,6 +977,95 @@ puts greeting
  #   scoping rules in Ruby; specifically the fact that a local 
  #   variable initialized outside of a block is accessible inside 
  #   he block.
+
+
+
+# 60) Describe the code below:
+a = 'hello'
+b = a
+a = 'goodbye'
+
+# My Answer:
+# The variable `a` is initialized on line 1 and references a string
+# object with value 'hello'. On line 2 `b` is initialized and 
+# points to the object that `a` is referencing. On line 3 `a` is 
+# reassigned to reference a new string object with the value
+# 'goodbye'.
+
+# Srdjan's Answer:
+# On line 1 of this code we are initializing the local variable a and assigning a string object with value hello to it.
+
+# On line 2 we are initializing the local variable b and assigning to it a string object that the local variable a is referencing. Currently, both of these local variables are pointing to the same object.
+
+# On line 3 we are reassigning the local variable a to a different string object with value goodbye so now, the local variable a is pointing to one string object with value goodbye and the local variable b is pointing to a string object with value hello.
+
+
+
+# 61) Describe this code line by line:
+def example(str)
+  i = 3
+  loop do
+    puts str
+    i -= 1
+    break if i == 0
+  end
+end
+
+example('hello')
+
+# My Answer:
+
+# On line 1-8 we define the method `example` which accepts
+# a parameter called 'str'. 
+
+# On line 2 we initialize the local variable `i` and assign 
+# an integer object with the value `3`to it. 
+
+# On line 3 we call the loop method and pass in the block
+# that goes from the `do` on line 3 to the `end` on line 7.
+
+# On line 4 we call the `puts` method and pass it the local 
+# variable `str` as an argument. Later when we invoke the `example`
+# method on line 10 and pass in the string object with value 
+# 'hello' as an argument, `str` will reference this string object
+# so on line 4 the `puts` method will output 'hello'.
+
+# On line 5 the local variable `i` is reassigned to an Integer
+# object with value 2. The syntax i -= 1 means i = i - 1. So really
+# two things are happening here. First, the `-` method is being
+# called on `i` and passing in the integer ` as an argument,
+# like this i.-(1). This returns the integer `2`. Then `i` is 
+# reassigned to the integer 2.
+
+# On line 6 we use the keyword break to exit the loop if the value
+# of the object that local variable `i` is referencing is
+# equivelant to 0.
+
+# On line 10 we invoke the `example` method and pass in a string
+# object with value 'hello' as an argument.
+
+# This code will output the string 'hello' three times and 
+# then return `nil` It returns `nil` because the `puts` 
+# method was the last line of code to be executed and `puts`
+# returns `nil`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
