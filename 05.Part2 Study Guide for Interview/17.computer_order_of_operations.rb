@@ -23,6 +23,16 @@ NUMBERS = {'zero' => 0, 'one' => 1, 'two' => 2, 'three' => 3, 'four' => 4,  'fiv
             'seven' => 7, 'eight' => 8, 'nine' => 9, 'ten' => 10, 'plus' => :+, 'minus' => :-, 
             'divided' => :/, 'times' => :*}
 
+def operate!(order)
+  order.map! do |element|
+    if element.class == Array
+      [element[0], element[2]].reduce(element[1])
+    else
+      element
+    end
+  end
+end
+
 
 def computer(string)
   english = string.split(" ")
@@ -41,15 +51,16 @@ def computer(string)
         order << [english[index - 1], element, english[index + 1]]
       elsif element.class == Symbol
         order << element
-      elsif index == english.length - 1 && english[index - 1].class != Symbol
+      elsif index == english.length - 1 && english[index - 1] != :* && english[index-1] != :/
         order << element
       end
+      binding.pry
+      operate!(order)
     end
   else
     order = english
   end
 
-  binding.pry
 
   english = order.map do |element|
     if element.class == Array
@@ -83,12 +94,12 @@ end
 # p computer("nine divided by three times six") == 18
 
 #These test cases DO respect order of operations
-p computer("eight times four plus six divided by two minus two") == 33
+# p computer("eight times four plus six divided by two minus two") == 33
 # p computer("one plus four times two minus two") == 7
 # p computer("nine divided by three times six") == 18
 # p computer("seven plus four divided by two") == 9
 # p computer("seven times four plus one divided by three minus two") == 26
-# p computer("one plus four times three divded by two minus two") == 5
+p computer("one plus four times three divided by two minus two") == 5
 # p computer("nine divided by three times six") == 18
 
 
