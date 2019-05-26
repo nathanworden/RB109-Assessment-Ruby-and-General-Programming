@@ -1,5 +1,7 @@
 # convert english phrase into a mathematical expression, step by step
 
+require 'pry'
+
 def computer(english)
   nums = {
     'zero' => 0,
@@ -14,6 +16,8 @@ def computer(english)
     'nine' => 9,
     'ten' => 10
   }
+
+  binding.pry
 
   nums.each do |word, num|
     english.gsub!(word, num.to_s)
@@ -50,14 +54,14 @@ def computer(english)
   return words.first
   end
 
-p computer("two plus two") == 4
-p computer("seven minus six") == 1
-p computer("zero plus eight") == 8
-p computer("two plus two minus three") == 1
+# p computer("two plus two") == 4
+# p computer("seven minus six") == 1
+# p computer("zero plus eight") == 8
+# p computer("two plus two minus three") == 1
 p computer("three minus one plus five minus 4 plus six plus 10 minus 4") == 15
-p computer("eight times four plus six divided by two minus two") == 17 # not 33
-p computer("one plus four times two minus two") == 8 # not 7
-p computer("nine divided by three times six") == 18
+# p computer("eight times four plus six divided by two minus two") == 17 # not 33
+# p computer("one plus four times two minus two") == 8 # not 7
+# p computer("nine divided by three times six") == 18
 
 
 

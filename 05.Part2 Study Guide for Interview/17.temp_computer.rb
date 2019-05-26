@@ -1,5 +1,3 @@
-
-
 # Create a pemdas array
 # Loop through the numbers array
 # If an element is a :* or a :/ symbol
@@ -14,8 +12,6 @@ NUMBERS = {'zero' => 0, 'one' => 1, 'two' => 2, 'three' => 3, 'four' => 4,  'fiv
             'seven' => 7, 'eight' => 8, 'nine' => 9, 'ten' => 10, 'plus' => :+, 'minus' => :-, 
             'divided' => :/, 'times' => :*}
 
-
-
 def operate!(order)
   loop do
     take_three = order.shift(3)
@@ -23,7 +19,6 @@ def operate!(order)
     break if order.size == 1
   end
 end
-
 
 def find_start_and_end_of_multiplication_and_division(english)
   current_index = 1
@@ -45,8 +40,6 @@ def find_start_and_end_of_multiplication_and_division(english)
   [start, final]
 end
 
-
-
 def computer(string)
   english = string.split(" ")
   english.delete('by')
@@ -56,11 +49,7 @@ def computer(string)
 
   while english.any? {|element| element == :* || element == :/}
     break if !english.include?(:+) && !english.include?(:-)
-
-
     start, final = find_start_and_end_of_multiplication_and_division(english)
-
-
     multiplication_division = english[start, (final - start + 1)]
     operate!(multiplication_division)
     english = [english[0, start], multiplication_division, english[final + 1, english.size]].flatten

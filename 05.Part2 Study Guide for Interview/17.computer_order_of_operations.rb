@@ -54,7 +54,6 @@ def computer(string)
       elsif index == english.length - 1 && english[index - 1] != :* && english[index-1] != :/
         order << element
       end
-      binding.pry
       operate!(order)
     end
   else
