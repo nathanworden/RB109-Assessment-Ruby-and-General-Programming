@@ -190,6 +190,7 @@ p str
 
 
 
+
 #15) What will this code return?
 # Concept: Inner scope can access variables initialized in an outer scope, but not vice versa.
 str = "Chris"
